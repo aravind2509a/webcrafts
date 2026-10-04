@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+<title>WebCrafts — Modern Website Development</title>
+<!-- Favicon using official brand logo -->
+<link href="https://lh3.googleusercontent.com/aida-public/AB6AXuAQz_K1ckcz0lMNeuNUWtLMBmvaD3sGKv7tD4_VufYq25udAL25PKuh8Dvb8bSfynjurs-9aM_3KmKj2k0bQWz_II6oVaRv3cwX-Fq0OYH-va5QVDLz9f9cI30cB8Uq3JI8ntaRWbrXk4E9W8GeVhGM1NCm3y2-8xcY1HGeucv-PJpGkQ9xluqE_XQvtVZZsrB-HlxfmVGNETQO8jDR5ZvB4XTr85H8qWgRa-wQlHZ3i8iLsJcA506gKojQjju5ELQlHQ" rel="icon" type="image/png"/>
+<!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+          },
+          colors: {
+            ink: {
+              950: '#06070B',
+              900: '#090A0F',
+              850: '#0D0F17',
+              800: '#12141F',
+              700: '#1E2233',
+            },
+            craftBlue: '#2563EB',
+            craftCyan: '#06B6D4',
+          },
+          boxShadow: {
+            'glow-cyan': '0 0 35px -8px rgba(6, 182, 212, 0.35)',
+            'glow-blue': '0 0 45px -10px rgba(37, 99, 235, 0.30)',
+            'glass': '0 20px 40px -15px rgba(0, 0, 0, 0.7)',
+          }
+        }
+      }
+    };
+  </script>
+<!-- BEGIN: Custom Typography and Base Styles -->
+<style data-purpose="base-styling">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #090A0F;
+      color: #F8F9FC;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #06B6D4;
+      color: #090A0F;
+    }
+
+    /* Custom Glass Panel */
+    .glass-card {
+      background: rgba(18, 20, 31, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card-subtle {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Subtle Ambient Radial Glow */
+    .radial-gradient-hero {
+      background: radial-gradient(circle at 50% 25%, rgba(37, 99, 235, 0.18) 0%, rgba(6, 182, 212, 0.08) 35%, transparent 70%);
+    }
+
+    /* Radio button pill active states */
+    .pill-radio:checked + label {
+      background-color: #2563EB;
+      border-color: #60A5FA;
+      color: #FFFFFF;
+      box-shadow: 0 0 15px rgba(37, 99, 235, 0.45);
+    }
+</style>
+<!-- END: Custom Typography and Base Styles -->
+</head>
+<body class="relative min-h-screen bg-[#090A0F] text-[#F8F9FC]">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 w-full border-b border-white/[0.08] bg-[#090A0F]/85 backdrop-blur-xl transition-all duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<!-- Brand Logo & Identity -->
+<a aria-label="WebCrafts Home" class="flex items-center gap-3 group" href="#">
+<div class="relative w-10 h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 to-blue-600 shadow-glow-cyan flex items-center justify-center overflow-hidden shrink-0">
+<img alt="WebCrafts Official Monogram" class="w-full h-full object-cover rounded-full bg-white transform group-hover:scale-105 transition-transform duration-300" height="40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAamlJoAqSDscXB4hsks-28RRzl4PdhLmAJbyFbdEQSkyIO4lJp-kMSIUlPtr5wKfHEiCyhJefmej6gHPu3H1Dkazrvpejs47iKcu8-3OruqLwGLFgQuGUcqlVegttIs2-DFYh_X6CwWoHxF-1P9joRdsh4d3I6h6ZQhcbWmMB0W4CrL3SkBAgfe1Ih5vMzV5eS6_O2JCF3kQcB5ofpSHDv2ACmEwjLCNpVpvD7EjHDGZEZb-UuXSCO7WH8lwiQRrsQg" width="40"/>
+</div>
+<div class="flex items-center">
+<span class="text-xl font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors">WebCrafts</span>
+</div>
+</a>
+<!-- Desktop Navigation Menu -->
+<nav aria-label="Main Navigation" class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
+<a class="hover:text-white transition-colors" href="#services">Services</a>
+<a class="hover:text-white transition-colors" href="#work">Work</a>
+<a class="hover:text-white transition-colors" href="#why-us">Why Us</a>
+<a class="hover:text-white transition-colors" href="#process">Process</a>
+<a class="hover:text-white transition-colors" href="#contact">Contact</a>
+</nav>
+<!-- Header Action Buttons -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-glow-cyan transition-all transform hover:-translate-y-0.5" href="#enquiry">
+        Start Your Project
+      </a>
+<!-- Mobile Menu Toggle Button -->
+<button aria-expanded="false" aria-label="Toggle navigation menu" class="md:hidden inline-flex items-center justify-center p-2.5 rounded-xl border border-white/10 text-neutral-300 hover:text-white hover:bg-white/5 focus:outline-none" id="mobileMenuBtn" type="button">
+<svg class="w-6 h-6" fill="none" id="hamburgerIcon" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<svg class="w-6 h-6 hidden" fill="none" id="closeIcon" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- Mobile Drawer Overlay Menu -->
+<div class="hidden md:hidden fixed inset-x-0 top-20 bg-ink-950/98 border-b border-white/10 backdrop-blur-2xl transition-all duration-300 px-6 py-8 flex flex-col gap-6" id="mobileMenu">
+<nav aria-label="Mobile Navigation" class="flex flex-col gap-5 text-base font-medium text-neutral-300">
+<a class="mobile-nav-link hover:text-cyan-400" href="#services">Services</a>
+<a class="mobile-nav-link hover:text-cyan-400" href="#work">Work</a>
+<a class="mobile-nav-link hover:text-cyan-400" href="#why-us">Why Us</a>
+<a class="mobile-nav-link hover:text-cyan-400" href="#process">Process</a>
+<a class="mobile-nav-link hover:text-cyan-400" href="#contact">Contact</a>
+</nav>
+<div class="pt-4 border-t border-white/10 flex flex-col gap-3">
+<a class="mobile-nav-link w-full py-3.5 text-center text-sm uppercase tracking-wider font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-glow-cyan" href="#enquiry">
+        Start Your Project →
+      </a>
+<a class="w-full py-3 text-center text-xs tracking-wider uppercase font-semibold text-cyan-400 hover:text-white" href="https://wa.me/917995467559?text=Hi%20WebCrafts%2C%20I%27m%20interested%20in%20getting%20a%20website%20for%20my%20business." rel="noopener noreferrer" target="_blank">
+        WhatsApp Us
+      </a>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroSection -->
+<section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden radial-gradient-hero">
+<!-- Ambient Background Glows -->
+<div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-b from-blue-600/20 via-cyan-500/10 to-transparent blur-[120px] rounded-full"></div>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+<!-- Studio Tagline Pill -->
+<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 backdrop-blur-md mb-8 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+<span class="text-xs uppercase font-mono font-bold tracking-widest text-cyan-300">DESIGN • DEVELOPMENT • LAUNCH</span>
+</div>
+<!-- Main Headline -->
+<h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
+      Websites That Make Businesses <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-200 to-cyan-400">Stand Out.</span>
+</h1>
+<!-- Subtitle -->
+<p class="mt-6 sm:mt-8 text-base sm:text-xl text-neutral-300 max-w-2xl mx-auto font-normal leading-relaxed">
+      We design and build modern, fast, mobile-friendly websites that help businesses look professional and turn visitors into customers.
+    </p>
+<!-- Primary Action Buttons -->
+<div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+<a class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold uppercase tracking-wider bg-white text-ink-950 hover:bg-neutral-200 shadow-xl hover:shadow-cyan-500/20 transition-all flex items-center justify-center gap-2 group" href="#enquiry">
+        Start Your Project
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
+</a>
+<a class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold tracking-wide border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-sm transition-all" href="#work">
+        View Our Work
+      </a>
+</div>
+<!-- Quick WhatsApp Text Link -->
+<div class="mt-5">
+<a class="inline-flex items-center gap-2 text-xs font-semibold text-neutral-400 hover:text-cyan-400 transition-colors" href="https://wa.me/917995467559?text=Hi%20WebCrafts%2C%20I%27m%20interested%20in%20getting%20a%20website%20for%20my%20business." rel="noopener noreferrer" target="_blank">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        Prefer direct messaging? <span class="underline decoration-cyan-500/50 underline-offset-4">WhatsApp Us</span>
+</a>
+</div>
+<!-- Hero Visual Showcase Mockup -->
+<div class="mt-14 sm:mt-20 relative max-w-5xl mx-auto">
+<div class="relative rounded-2xl p-2 sm:p-3 bg-gradient-to-b from-white/15 via-white/5 to-transparent border border-white/15 shadow-glow-blue">
+<div class="overflow-hidden rounded-xl bg-ink-950 relative aspect-[16/9] flex items-center justify-center">
+<img alt="WebCrafts Hero Tech Showcase Mockup" class="w-full h-full object-cover rounded-lg shadow-glass" loading="eager" src="https://lh3.googleusercontent.com/aida/AEtjO1VH4F5ZJeyPFfpIF8TavSMtb9MhvPrUtXkqyxz2y7li05qmmqhgeLXPg_kTPK4GUE7I4x8apT1RdAHGQ8o2JMxK9fr3EygHmxNOvv88sPlSZ6CeSNyhsXymEDsF2aohd1Y1ffHscNr4A4qp-tXYiUIhpt61Ghfsir8ExQ3zOXPafXtC0i5Y_c3RgcM4LHxLKpvLiZJFOX1sKG1WV-YZfA0A0SfdCuOLKYteRMA8ccsuNFXqopmdLYwXYMw"/>
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 opacity-60"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: ServicesSection -->
+<section class="py-20 md:py-28 bg-ink-850 relative border-t border-b border-white/[0.06]" id="services">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Section Header -->
+<div class="max-w-2xl mb-16">
+<span class="text-xs uppercase font-mono font-bold tracking-widest text-cyan-400">Services</span>
+<h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-2">
+        What We Build
+      </h2>
+<p class="mt-4 text-base sm:text-lg text-neutral-300">
+        From a simple business website to a bespoke web experience, we craft websites centered around your business and goals.
+      </p>
+</div>
+<!-- Services 4-Block Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- 01: Business Websites -->
+<article class="glass-card rounded-2xl p-8 hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-sm font-mono text-cyan-400 font-semibold tracking-wider">01</span>
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-400/20 group-hover:bg-cyan-400 transition-colors"></span>
+</div>
+<h3 class="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+            Business Websites
+          </h3>
+<p class="mt-4 text-sm sm:text-base text-neutral-300 leading-relaxed">
+            Modern websites for businesses that want a professional online presence.
+          </p>
+</div>
+<div class="mt-8 pt-4 border-t border-white/5 flex items-center justify-between">
+<a class="text-xs font-semibold text-cyan-400 hover:text-white transition-colors inline-flex items-center gap-1.5" href="https://mawasbigbellycafe.netlify.app/" rel="noopener noreferrer" target="_blank">
+            View Demo <span>→</span>
+</a>
+<span class="text-[11px] font-mono text-neutral-500">Built for credibility &amp; inquiries</span>
+</div>
+</article>
+<!-- 02: Landing Pages -->
+<article class="glass-card rounded-2xl p-8 hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-sm font-mono text-cyan-400 font-semibold tracking-wider">02</span>
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-400/20 group-hover:bg-cyan-400 transition-colors"></span>
+</div>
+<h3 class="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+            Landing Pages
+          </h3>
+<p class="mt-4 text-sm sm:text-base text-neutral-300 leading-relaxed">
+            High-converting landing pages designed around a specific product, service, campaign, or goal.
+          </p>
+</div>
+<div class="mt-8 pt-4 border-t border-white/5 flex items-center justify-between">
+<a class="text-xs font-semibold text-cyan-400 hover:text-white transition-colors inline-flex items-center gap-1.5" href="#enquiry" id="landing-page-demo-link">
+            Demo on Request <span>→</span>
+</a>
+<span class="text-[11px] font-mono text-neutral-500">Focused on conversions</span>
+</div>
+</article>
+<!-- 03: Portfolio Websites -->
+<article class="glass-card rounded-2xl p-8 hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-sm font-mono text-cyan-400 font-semibold tracking-wider">03</span>
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-400/20 group-hover:bg-cyan-400 transition-colors"></span>
+</div>
+<h3 class="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+            Portfolio Websites
+          </h3>
+<p class="mt-4 text-sm sm:text-base text-neutral-300 leading-relaxed">
+            Clean, visually impressive websites for creators, freelancers, designers, developers, and professionals.
+          </p>
+</div>
+<div class="mt-8 pt-4 border-t border-white/5 flex items-center justify-between">
+<a class="text-xs font-semibold text-cyan-400 hover:text-white transition-colors inline-flex items-center gap-1.5" href="https://vasu-3dportfolio.netlify.app/" rel="noopener noreferrer" target="_blank">
+            View Demo <span>→</span>
+</a>
+<span class="text-[11px] font-mono text-neutral-500">Showcasing your craft</span>
+</div>
+</article>
+<!-- 04: Custom Websites -->
+<article class="glass-card rounded-2xl p-8 hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-sm font-mono text-cyan-400 font-semibold tracking-wider">04</span>
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-400/20 group-hover:bg-cyan-400 transition-colors"></span>
+</div>
+<h3 class="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+            Custom Websites
+          </h3>
+<p class="mt-4 text-sm sm:text-base text-neutral-300 leading-relaxed">
+            Custom-designed websites built around the client's requirements.
+          </p>
+</div>
+<div class="mt-8 pt-4 border-t border-white/5 flex items-center justify-between">
+<a class="text-xs font-semibold text-cyan-400 hover:text-white transition-colors inline-flex items-center gap-1.5" href="https://ishotreels.netlify.app/" rel="noopener noreferrer" target="_blank">
+            View Demo <span>→</span>
+</a>
+<span class="text-[11px] font-mono text-neutral-500">Tailored architecture</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- END: ServicesSection -->
+<!-- BEGIN: SelectedWorkSection -->
+<section class="py-20 md:py-32 relative" id="work">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+<div>
+<span class="text-xs uppercase font-mono font-bold tracking-widest text-cyan-400">Portfolio</span>
+<h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-2">
+          Selected Work
+        </h2>
+<p class="mt-2 text-lg font-semibold text-cyan-300">
+          Real projects. Real businesses.
+        </p>
+<p class="mt-2 text-sm sm:text-base text-neutral-400 max-w-xl">
+          We craft purposeful, responsive digital experiences built to elevate brands and convert visitors.
+        </p>
+</div>
+<a class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-400 hover:text-white transition-colors" href="#enquiry">
+        Discuss your project <span>→</span>
+</a>
+</div>
+<!-- Real Client Projects Stack -->
+<div class="space-y-10 sm:space-y-14">
+<!-- Project 01: Mawa's Big Belly Cafe -->
+<article class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden group">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="lg:col-span-6 order-2 lg:order-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-cyan-400/10 border border-cyan-400/30 text-cyan-300">Business Website</span>
+<span class="text-xs font-mono text-neutral-400">Live Client Project</span>
+</div>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 tracking-tight">
+            Mawa's Big Belly Cafe
+          </h3>
+<p class="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
+            A modern website designed for a local cafe to showcase its brand, menu, location, reviews, and contact information.
+          </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Artisanal Bakery &amp; Cafe</span>
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Digital Menu Flow</span>
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Direct Inquiries</span>
+</div>
+<div>
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-white text-ink-950 hover:bg-cyan-300 transition-all shadow-lg group/btn" href="https://mawasbigbellycafe.netlify.app/" rel="noopener noreferrer" target="_blank">
+<span>View Demo</span>
+<span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-6 order-1 lg:order-2">
+<div class="relative rounded-2xl border border-white/10 bg-ink-950/70 p-2 sm:p-3 overflow-hidden group-hover:border-cyan-500/30 transition-all shadow-xl">
+<div class="aspect-[16/9] w-full rounded-xl overflow-hidden bg-ink-900 relative">
+<img alt="Mawa's Big Belly Cafe Website Preview" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500" loading="lazy" src="https://lh3.googleusercontent.com/aida/AEtjO1UfjFLQ2mnjEum2LCgubVLX2qkm2PxnhX7thadVun5bxntMcirtG-9hP62lW4CdlslB6Eyg3LF5klc9kywChZi9yTwdvaBSr6oc8NliP_l_FJwSYPYg27Z-EX_6N-7oCjNfqnJsoB8I9f-s7o8SdbzqRYYF45Ln8nKprLnynYcsUooji3emu7FvSSomVm471emX_DhHcHiOrB4LVNYLc_Ce6PoCdiKBN4H9ycAH90wRI1tIqtp0l59e71g"/>
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/60 via-transparent to-transparent"></div>
+</div>
+</div>
+</div>
+</article>
+<!-- Project 02: iShootReels -->
+<article class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden group">
+<div class="absolute -left-20 -bottom-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="lg:col-span-6 order-2 lg:order-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-blue-500/10 border border-blue-400/30 text-blue-300">Business / Service Website</span>
+<span class="text-xs font-mono text-neutral-400">Live Client Project</span>
+</div>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 tracking-tight">
+            iShootReels
+          </h3>
+<p class="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
+            A modern service website for an on-the-spot event reels and content creation business.
+          </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Event Reels Showcase</span>
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Fast Booking System</span>
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Mobile Video Studio</span>
+</div>
+<div>
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-white text-ink-950 hover:bg-cyan-300 transition-all shadow-lg group/btn" href="https://ishotreels.netlify.app/" rel="noopener noreferrer" target="_blank">
+<span>View Demo</span>
+<span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-6 order-1 lg:order-2">
+<div class="relative rounded-2xl border border-white/10 bg-ink-950/70 p-2 sm:p-3 overflow-hidden group-hover:border-cyan-500/30 transition-all shadow-xl">
+<div class="aspect-[16/9] w-full rounded-xl overflow-hidden bg-ink-900 relative">
+<img alt="iShootReels Website Preview" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500" loading="lazy" src="https://lh3.googleusercontent.com/aida/AEtjO1XkfrC7nEMZS4iR2EgYMvckNgjUouXw38hnFrsoFs0WmGtQ0FqjvC23iPlEdeamw1DRz6kvhXebXdE9-RnRiZCZYvCnQwMXg1u58i76P7_sRB1bhd2tiNzXX-6x8r7dcOccS9SdVqkBNgtJBh2Opd1S-fIx1e0xMv2CG4Dc0QUR3JGobisr2z2xgJex7GeF4ijWJyMpNpPvW3J6iCEHHK3b8epLFCYTSGzpY63YGeHAKF-AhJEVdMdicBo"/>
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/60 via-transparent to-transparent"></div>
+</div>
+</div>
+</div>
+</article>
+<!-- Project 03: Vasu Gudala -->
+<article class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden group">
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="lg:col-span-6 order-2 lg:order-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-purple-400/10 border border-purple-400/30 text-purple-300">Portfolio Website</span>
+<span class="text-xs font-mono text-neutral-400">Live Client Project</span>
+</div>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 tracking-tight">
+            Vasu Gudala
+          </h3>
+<p class="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
+            A creative portfolio website showcasing graphic design, 3D work, Unreal Engine projects, and video editing.
+          </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">3D CGI Renders</span>
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Unreal Engine Showcase</span>
+<span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-neutral-300">Editorial Dark Grid</span>
+</div>
+<div>
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-white text-ink-950 hover:bg-cyan-300 transition-all shadow-lg group/btn" href="https://vasu-3dportfolio.netlify.app/" rel="noopener noreferrer" target="_blank">
+<span>View Demo</span>
+<span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-6 order-1 lg:order-2">
+<div class="relative rounded-2xl border border-white/10 bg-ink-950/70 p-2 sm:p-3 overflow-hidden group-hover:border-cyan-500/30 transition-all shadow-xl">
+<div class="aspect-[16/9] w-full rounded-xl overflow-hidden bg-ink-900 relative">
+<img alt="Vasu Gudala Portfolio Website Preview" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500" loading="lazy" src="https://lh3.googleusercontent.com/aida/AEtjO1U3nfEhO4eCIKjFrGWZ2P4agQSZaVKhqQpNm6RBHGXTh0jqV6gZ-GFKfKNRt1AoPD_fZh_T8cklIFfzQkIb18mOcgibsokkeyYeDj7g5cxikXwpEqSCeftmFyj9t4E2e4ZOnKJ9b8bjLUUo0p_-zRI3VdmGlpu4CYWp9jFReN-EtFGoOnOS-6INq0UoHwTgD_v0JuiTha-hZ0PMpxPaaHSRsvU_cJD8uFWhz58Uk12_uPFrsRYjBWTzJg"/>
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/60 via-transparent to-transparent"></div>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Subtle post-work notice -->
+<div class="mt-12 text-center">
+<p class="text-xs sm:text-sm font-mono text-neutral-400">
+        More projects are on the way.
+      </p>
+</div>
+</div>
+</section>
+<!-- END: SelectedWorkSection -->
+<!-- BEGIN: WhyWebCraftsSection -->
+<section class="py-20 md:py-28 bg-ink-850 border-t border-b border-white/[0.06] relative" id="why-us">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-3xl mb-16">
+<span class="text-xs uppercase font-mono font-bold tracking-widest text-cyan-400">Why WebCrafts?</span>
+<h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-2">
+        Built Around Your Business.
+      </h2>
+<p class="mt-4 text-base sm:text-xl text-neutral-300 leading-relaxed">
+        We build websites that give your business a reliable, professional, and lasting online foundation.
+      </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Point 1 -->
+<div class="glass-card-subtle p-6 rounded-2xl hover:border-cyan-500/30 transition-all">
+<div class="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-cyan-400 mb-5">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Modern Design</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+          Clean, intentional interfaces designed to make a strong impression.
+        </p>
+</div>
+<!-- Point 2 -->
+<div class="glass-card-subtle p-6 rounded-2xl hover:border-cyan-500/30 transition-all">
+<div class="w-12 h-12 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-5">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Mobile First</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+          Every website works seamlessly across phones, tablets, and desktops.
+        </p>
+</div>
+<!-- Point 3 -->
+<div class="glass-card-subtle p-6 rounded-2xl hover:border-cyan-500/30 transition-all">
+<div class="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-cyan-400 mb-5">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Fast Performance</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+          Lightweight, optimized code built for lightning-fast loading speeds.
+        </p>
+</div>
+<!-- Point 4 -->
+<div class="glass-card-subtle p-6 rounded-2xl hover:border-cyan-500/30 transition-all">
+<div class="w-12 h-12 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-5">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Built Around Your Business</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+          We craft each page specifically around your goals and audience.
+        </p>
+</div>
+<!-- Point 5 -->
+<div class="glass-card-subtle p-6 rounded-2xl hover:border-cyan-500/30 transition-all">
+<div class="w-12 h-12 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Direct Communication</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+          Quick, transparent updates directly with the developers building your site.
+        </p>
+</div>
+<!-- Point 6 -->
+<div class="glass-card-subtle p-6 rounded-2xl hover:border-cyan-500/30 transition-all">
+<div class="w-12 h-12 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-5">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Clean, Professional Development</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+          Modern web standards, maintainable structure, and launch-ready reliability.
+        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: WhyWebCraftsSection -->
+<!-- BEGIN: ProcessSection -->
+<section class="py-20 md:py-28 relative" id="process">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
+<span class="text-xs uppercase font-mono font-bold tracking-widest text-cyan-400">Simple Process</span>
+<h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-2">
+        From Idea To Launch.
+      </h2>
+<p class="mt-3 text-sm sm:text-base text-neutral-300">
+        A clear, stress-free path to getting your new website up and running.
+      </p>
+</div>
+<!-- Process Steps Grid -->
+<div class="relative grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Step 1 -->
+<div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between border-t-2 border-t-blue-500">
+<div>
+<div class="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold mb-3">01 — Tell Us</div>
+<h3 class="text-xl font-bold text-white mb-2">Tell Us</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+            Tell us about your business and what you need.
+          </p>
+</div>
+<div class="mt-6 text-xs text-neutral-400 font-medium">Quick form or WhatsApp</div>
+</div>
+<!-- Step 2 -->
+<div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between border-t-2 border-t-cyan-500">
+<div>
+<div class="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold mb-3">02 — We Talk</div>
+<h3 class="text-xl font-bold text-white mb-2">We Talk</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+            We discuss your goals, ideas, pages, features, and requirements.
+          </p>
+</div>
+<div class="mt-6 text-xs text-neutral-400 font-medium">Direct scope discussion</div>
+</div>
+<!-- Step 3 -->
+<div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between border-t-2 border-t-blue-500">
+<div>
+<div class="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold mb-3">03 — We Build</div>
+<h3 class="text-xl font-bold text-white mb-2">We Build</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+            We design and develop the website around your business.
+          </p>
+</div>
+<div class="mt-6 text-xs text-neutral-400 font-medium">Design + Clean Code</div>
+</div>
+<!-- Step 4 -->
+<div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between border-t-2 border-t-emerald-400">
+<div>
+<div class="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold mb-3">04 — You Launch</div>
+<h3 class="text-xl font-bold text-white mb-2">You Launch</h3>
+<p class="text-sm text-neutral-300 leading-relaxed">
+            Your website goes live and is ready for customers.
+          </p>
+</div>
+<div class="mt-6 text-xs text-emerald-400 font-medium">Live to the world 🎉</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ProcessSection -->
+<!-- BEGIN: ProjectFormSection (#enquiry / #contact-form) -->
+<section class="py-20 md:py-32 bg-ink-850 relative border-t border-white/[0.06]" id="enquiry">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" id="contact-form">
+<!-- Section Header -->
+<div class="text-center max-w-2xl mx-auto mb-12">
+<span class="text-xs uppercase font-mono font-bold tracking-widest text-cyan-400">Get Started</span>
+<h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-2">
+        Let’s Build Your Website
+      </h2>
+<p class="mt-3 text-base text-neutral-300">
+        Tell us about your project and we'll get back to you.
+      </p>
+</div>
+<!-- Main Form Wrapper Container -->
+<div class="glass-card rounded-3xl p-6 sm:p-12 border border-white/10 shadow-2xl relative overflow-hidden">
+<!-- Dynamic Interactive Form -->
+<form class="space-y-8" id="websiteInquiryForm" onsubmit="event.preventDefault(); handleFormSubmit();">
+<!-- Contact Basics Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Full Name -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-2" for="fullName">
+              Full Name <span class="text-cyan-400">*</span>
+</label>
+<input class="w-full px-4 py-3.5 rounded-xl bg-ink-950 border border-white/10 text-white placeholder-neutral-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm outline-none" id="fullName" name="fullName" placeholder="e.g. Maya Sharma" required="" type="text"/>
+</div>
+<!-- Business / Brand Name -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-2" for="brandName">
+              Business / Brand Name <span class="text-cyan-400">*</span>
+</label>
+<input class="w-full px-4 py-3.5 rounded-xl bg-ink-950 border border-white/10 text-white placeholder-neutral-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm outline-none" id="brandName" name="brandName" placeholder="e.g. Bloom Studio" required="" type="text"/>
+</div>
+<!-- WhatsApp Number -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-2" for="whatsappNumber">
+              WhatsApp Number <span class="text-cyan-400">*</span>
+</label>
+<input class="w-full px-4 py-3.5 rounded-xl bg-ink-950 border border-white/10 text-white placeholder-neutral-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm outline-none" id="whatsappNumber" name="whatsappNumber" placeholder="e.g. +91 79954 67559" required="" type="tel"/>
+</div>
+<!-- Email Address -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-2" for="emailAddress">
+              Email Address <span class="text-neutral-500 font-normal">(Optional)</span>
+</label>
+<input class="w-full px-4 py-3.5 rounded-xl bg-ink-950 border border-white/10 text-white placeholder-neutral-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm outline-none" id="emailAddress" name="emailAddress" placeholder="name@business.com" type="email"/>
+</div>
+</div>
+<!-- Website Type Selection Pills -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-3">
+            What type of website do you need? <span class="text-cyan-400">*</span>
+</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+<div>
+<input checked="" class="hidden pill-radio" id="type-biz" name="siteType" type="radio" value="Business Website"/>
+<label class="block text-center py-3 px-3 rounded-xl border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-neutral-300 cursor-pointer hover:border-white/30 transition-all" for="type-biz">
+                Business Website
+              </label>
+</div>
+<div>
+<input class="hidden pill-radio" id="type-landing" name="siteType" type="radio" value="Landing Page"/>
+<label class="block text-center py-3 px-3 rounded-xl border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-neutral-300 cursor-pointer hover:border-white/30 transition-all" for="type-landing">
+                Landing Page
+              </label>
+</div>
+<div>
+<input class="hidden pill-radio" id="type-portfolio" name="siteType" type="radio" value="Portfolio Website"/>
+<label class="block text-center py-3 px-3 rounded-xl border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-neutral-300 cursor-pointer hover:border-white/30 transition-all" for="type-portfolio">
+                Portfolio Website
+              </label>
+</div>
+<div>
+<input class="hidden pill-radio" id="type-custom" name="siteType" type="radio" value="Custom Website"/>
+<label class="block text-center py-3 px-3 rounded-xl border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-neutral-300 cursor-pointer hover:border-white/30 transition-all" for="type-custom">
+                Custom Website
+              </label>
+</div>
+<div class="col-span-2 sm:col-span-1">
+<input class="hidden pill-radio" id="type-notsure" name="siteType" type="radio" value="Not Sure"/>
+<label class="block text-center py-3 px-3 rounded-xl border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-neutral-300 cursor-pointer hover:border-white/30 transition-all" for="type-notsure">
+                Not Sure
+              </label>
+</div>
+</div>
+</div>
+<!-- Existing Website Question -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-3">
+            Do you already have a website? <span class="text-cyan-400">*</span>
+</label>
+<div class="flex gap-4">
+<div class="w-1/2">
+<input checked="" class="hidden pill-radio" id="exist-no" name="existingWebsite" type="radio" value="No"/>
+<label class="block text-center py-3 px-4 rounded-xl border border-white/10 bg-white/5 text-sm font-medium text-neutral-300 cursor-pointer hover:border-white/30 transition-all" for="exist-no">
+                No, Starting Fresh
+              </label>
+</div>
+<div class="w-1/2">
+<input class="hidden pill-radio" id="exist-yes" name="existingWebsite" type="radio" value="Yes"/>
+<label class="block text-center py-3 px-4 rounded-xl border border-white/10 bg-white/5 text-sm font-medium text-neutral-300 cursor-pointer hover:border-white/30 transition-all" for="exist-yes">
+                Yes, Want a Redesign
+              </label>
+</div>
+</div>
+</div>
+<!-- Project Description Textarea -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-2" for="projectDetails">
+            Tell us about your business and what you need <span class="text-cyan-400">*</span>
+</label>
+<textarea class="w-full px-4 py-3.5 rounded-xl bg-ink-950 border border-white/10 text-white placeholder-neutral-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm outline-none resize-y" id="projectDetails" name="projectDetails" placeholder="Give a brief summary of what your business does, key pages or goals, and any design references you like..." required="" rows="4"></textarea>
+</div>
+<!-- Additional Notes -->
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-2" for="additionalNotes">
+            Anything else we should know? <span class="text-neutral-500 font-normal">(Optional)</span>
+</label>
+<textarea class="w-full px-4 py-3 rounded-xl bg-ink-950 border border-white/10 text-white placeholder-neutral-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm outline-none resize-y" id="additionalNotes" name="additionalNotes" placeholder="Any deadline constraints, specific URLs you like, or special questions..." rows="2"></textarea>
+</div>
+<!-- Submit Action Area -->
+<div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+<button class="w-full sm:w-auto px-10 py-4 rounded-xl text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-glow-cyan transition-all transform hover:-translate-y-0.5" type="submit">
+            Send Project Enquiry →
+          </button>
+<p class="text-xs text-neutral-400 text-center sm:text-right">
+            🔒 Your information is only used to understand your project and contact you.
+          </p>
+</div>
+</form>
+<!-- Dynamic Success Message (Hidden by default) -->
+<div class="hidden py-12 text-center" id="formSuccessMessage">
+<div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center mx-auto mb-6">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white">Thanks! Your enquiry has been received.</h3>
+<p class="text-base text-neutral-300 max-w-md mx-auto mt-3 leading-relaxed">
+          We'll get back to you shortly.
+        </p>
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold tracking-wide transition-all shadow-lg flex items-center gap-2" href="https://wa.me/917995467559?text=Hi%20WebCrafts%2C%20I%27m%20interested%20in%20getting%20a%20website%20for%20my%20business." rel="noopener noreferrer" target="_blank">
+<span>Chat With Us On WhatsApp</span>
+<span>→</span>
+</a>
+<button class="px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-300 text-xs font-semibold tracking-wider uppercase transition-colors" onclick="resetInquiryForm()" type="button">
+            Submit Another Enquiry
+          </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ProjectFormSection -->
+<!-- BEGIN: DirectContactSection -->
+<section class="py-20 md:py-28 relative" id="contact">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="text-xs uppercase font-mono font-bold tracking-widest text-cyan-400">Direct Communication</span>
+<h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+        Prefer To Talk Directly?
+      </h2>
+<p class="mt-3 text-sm sm:text-base text-neutral-300">
+        You can reach us wherever you're most comfortable.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- WhatsApp Card -->
+<a class="glass-card p-8 rounded-2xl hover:border-emerald-500/50 hover:bg-white/[0.04] transition-all group flex flex-col justify-between" href="https://wa.me/917995467559?text=Hi%20WebCrafts%2C%20I%27m%20interested%20in%20getting%20a%20website%20for%20my%20business." rel="noopener noreferrer" target="_blank">
+<div>
+<div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold text-white mb-1">WhatsApp</h3>
+<p class="text-xs font-mono text-cyan-300 mb-2">+91 79954 67559</p>
+<p class="text-sm text-neutral-300 font-medium">Fast direct chat for inquiries and questions.</p>
+</div>
+<div class="mt-8 text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+          Message Us <span>→</span>
+</div>
+</a>
+<!-- Email Card -->
+<a class="glass-card p-8 rounded-2xl hover:border-cyan-500/50 hover:bg-white/[0.04] transition-all group flex flex-col justify-between" href="mailto:webcrafts2509@gmail.com">
+<div>
+<div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold text-white mb-1">Email</h3>
+<p class="text-xs font-mono text-cyan-300 mb-2">webcrafts2509@gmail.com</p>
+<p class="text-sm text-neutral-300 font-medium">Send detailed project requirements or RFPs.</p>
+</div>
+<div class="mt-8 text-xs font-bold text-cyan-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+          Email Us <span>→</span>
+</div>
+</a>
+<!-- Instagram Card -->
+<a class="glass-card p-8 rounded-2xl hover:border-pink-500/50 hover:bg-white/[0.04] transition-all group flex flex-col justify-between" href="https://www.instagram.com/webcrafts__/" rel="noopener noreferrer" target="_blank">
+<div>
+<div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 text-pink-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold text-white mb-1">Instagram</h3>
+<p class="text-xs font-mono text-cyan-300 mb-2">@webcrafts__</p>
+<p class="text-sm text-neutral-300 font-medium">Follow our web builds and behind the scenes.</p>
+</div>
+<div class="mt-8 text-xs font-bold text-pink-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+          Visit Instagram <span>→</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- END: DirectContactSection -->
+<!-- BEGIN: FinalCTASection -->
+<section class="py-16 md:py-24 relative overflow-hidden">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="relative rounded-3xl p-8 sm:p-14 bg-gradient-to-b from-ink-800 to-ink-950 border border-cyan-500/30 shadow-glow-cyan text-center overflow-hidden">
+<!-- Background light streak -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-cyan-400/20 to-transparent blur-3xl pointer-events-none"></div>
+<div class="relative z-10">
+<h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Have a business that needs a better website?
+        </h2>
+<p class="mt-4 text-base sm:text-lg text-neutral-300 max-w-xl mx-auto">
+          Let’s build something that makes your business look as good online as it does in real life.
+        </p>
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold uppercase tracking-wider bg-white text-ink-950 hover:bg-neutral-200 transition-all shadow-xl" href="#enquiry">
+            Start Your Project →
+          </a>
+<a class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold tracking-wide border border-white/20 bg-white/5 hover:bg-white/10 text-white transition-all flex items-center justify-center gap-2" href="https://wa.me/917995467559?text=Hi%20WebCrafts%2C%20I%27m%20interested%20in%20getting%20a%20website%20for%20my%20business." rel="noopener noreferrer" target="_blank">
+            WhatsApp Us
+          </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: FinalCTASection -->
+<!-- BEGIN: MainFooter -->
+<footer class="border-t border-white/[0.08] bg-ink-950 pt-16 pb-24 md:pb-16 text-neutral-400 text-sm">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/[0.06]">
+<!-- Brand Info -->
+<div class="md:col-span-5 space-y-4">
+<a aria-label="WebCrafts Home" class="flex items-center gap-3" href="#">
+<div class="w-9 h-9 rounded-full overflow-hidden border border-white/20 shrink-0 bg-white flex items-center justify-center">
+<img alt="WebCrafts Monogram" class="w-full h-full object-cover" height="36" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGQhUMInmooiXVDsts5wQlMBKtZr93Nie1mjCjjxn3AAdM8tHFwbCadQ4nV1VRM-h_2nGp8TYSSLtrOXWR63ED28eRU2rghZaBRwLsAmiG_acM2oqgQ-wnz8hQ0yR9E9ce3-BzWALDhxMp36QySHKSHN5HQbwlPSYMcp-b13tX9TTDsQNq_wadYnfsdF9uLvafDMszU3QyM3I1OBQT-OJpHv4KFF3jg_H6GMv2Xckj0HR8K3byFh0ZiQzEycgpnhxQng" width="36"/>
+</div>
+<span class="text-xl font-bold text-white tracking-tight">WebCrafts</span>
+</a>
+<p class="text-xs sm:text-sm text-neutral-400 max-w-sm leading-relaxed">
+          Modern websites for modern businesses.
+        </p>
+</div>
+<!-- Navigation Links -->
+<div class="md:col-span-3 space-y-3">
+<div class="text-xs font-mono font-bold text-white uppercase tracking-wider">Navigation</div>
+<ul class="space-y-2 text-xs">
+<li><a class="hover:text-white transition-colors" href="#services">Services</a></li>
+<li><a class="hover:text-white transition-colors" href="#work">Work</a></li>
+<li><a class="hover:text-white transition-colors" href="#why-us">Why Us</a></li>
+<li><a class="hover:text-white transition-colors" href="#process">Process</a></li>
+<li><a class="hover:text-white transition-colors" href="#contact">Contact</a></li>
+</ul>
+</div>
+<!-- Direct Connect Links -->
+<div class="md:col-span-4 space-y-3">
+<div class="text-xs font-mono font-bold text-white uppercase tracking-wider">Direct Details</div>
+<ul class="space-y-2.5 text-xs">
+<li>
+<a class="hover:text-white transition-colors flex items-center gap-2" href="https://wa.me/917995467559?text=Hi%20WebCrafts%2C%20I%27m%20interested%20in%20getting%20a%20website%20for%20my%20business." rel="noopener noreferrer" target="_blank">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              WhatsApp: +91 79954 67559
+            </a>
+</li>
+<li>
+<a class="hover:text-white transition-colors flex items-center gap-2" href="mailto:webcrafts2509@gmail.com">
+<span>✉</span> webcrafts2509@gmail.com
+            </a>
+</li>
+<li>
+<a class="hover:text-white transition-colors flex items-center gap-2" href="https://www.instagram.com/webcrafts__/" rel="noopener noreferrer" target="_blank">
+<span>✦</span> Instagram: @webcrafts__
+            </a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Bar -->
+<div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-400 gap-4">
+<div>
+        © 2026 WebCrafts. All rights reserved.
+      </div>
+<div class="flex gap-6">
+<span>Modern Website Development</span>
+<a class="hover:text-white transition-colors" href="#">Back to top ↑</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: FloatingWhatsAppWidget -->
+<!-- Fixed Floating WhatsApp Pill for Instant Mobile/Desktop Inquiries -->
+<aside aria-label="Instant WhatsApp Chat" class="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-50 flex items-center">
+<a class="group flex items-center gap-2.5 bg-ink-950/90 hover:bg-ink-900 border border-emerald-500/40 px-4 py-2.5 rounded-full shadow-2xl backdrop-blur-md transition-all hover:scale-105 active:scale-95" href="https://wa.me/917995467559?text=Hi%20WebCrafts%2C%20I%27m%20interested%20in%20getting%20a%20website%20for%20my%20business." rel="noopener noreferrer" target="_blank">
+<div class="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-sm shrink-0">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path>
+</svg>
+</div>
+<div class="flex flex-col text-left">
+<span class="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-400">Chat with us</span>
+<span class="text-xs font-semibold text-white">Online on WhatsApp</span>
+</div>
+</a>
+</aside>
+<!-- END: FloatingWhatsAppWidget -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="mobile-navigation">
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const hamburgerIcon = document.getElementById('hamburgerIcon');
+  const closeIcon = document.getElementById('closeIcon');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  function toggleMenu() {
+    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+    mobileMenu.classList.toggle('hidden');
+    hamburgerIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+  }
+
+  mobileMenuBtn.addEventListener('click', toggleMenu);
+
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (!mobileMenu.classList.contains('hidden')) {
+        toggleMenu();
+      }
+    });
+  });
+</script>
+<script data-purpose="form-handling">
+  function handleFormSubmit() {
+    const form = document.getElementById('websiteInquiryForm');
+    const successBlock = document.getElementById('formSuccessMessage');
+
+    if (form.checkValidity()) {
+      form.classList.add('hidden');
+      successBlock.classList.remove('hidden');
+      successBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      form.reportValidity();
+    }
+  }
+
+  function resetInquiryForm() {
+    const form = document.getElementById('websiteInquiryForm');
+    const successBlock = document.getElementById('formSuccessMessage');
+
+    form.reset();
+    successBlock.classList.add('hidden');
+    form.classList.remove('hidden');
+  }
+</script>
+<!-- END: InteractiveScripts -->
+</body></html>
